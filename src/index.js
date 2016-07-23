@@ -37,7 +37,7 @@ const LoginButtonsUI = ({ auth, showSignInPopup, actions }) => (
                   <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </div>
                 </If>
-                <EmailSignin actions={actions} />
+                <EmailSignin actions={actions} auth={auth} />
               </If>
             </div>
           <Else />
@@ -66,6 +66,7 @@ class EmailSignin extends Component {
   }
 
   render() {
+    const { error } = this.props.auth;
 
     return (
       <div className="login-form login-password-form">
@@ -85,6 +86,10 @@ class EmailSignin extends Component {
           <input id="login-password" type="password" autoComplete="off"
             ref={ref => this.password = ref} style={styles.loginEmailPassword} />
         </div>
+
+        <If condition={error}>
+          <div className="message error-message">{error}</div>
+        </If>
 
         <div className="login-button login-button-form-submit" id="login-buttons-password"
           onClick={this.login}>Sign in</div>
