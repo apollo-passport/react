@@ -20,9 +20,9 @@ const styles = {
 const LoginButtonsUI = ({ auth, showSignInPopup, actions }) => (
   <div id="login-buttons" className="login-buttons-dropdown-align-left">
     <div className="login-link-and-dropdown-list login-form-sign-in">
-      <If condition={auth.userId}>
+      <If condition={auth.data.userId}>
         <div onClick={actions.logout}>
-          Log Out from {auth.userId}
+          Log Out from {auth.data.userId}
         </div>
       <Else />
           <If condition={showSignInPopup}>
