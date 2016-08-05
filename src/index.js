@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import LocalSignIn from './local';
+import Local from './local';
 
 function bindValues(obj, that) {
   const out = {};
@@ -19,28 +19,33 @@ const LoginButtonsUI = ({ auth, showPopup, actions, apolloPassport }) => (
 
           <If condition={auth.data.userId}>
 
-            <div className="login-button"
-                id="login-buttons-open-change-password"
-                onClick={actions.showChangePass}>
-              Change password
-            </div>
+            <If condition={showPopup === 'changePass'}>
 
-            <div className="login-button" id="login-buttons-logout" onClick={actions.logout}>
-              Sign out
-            </div>
+              <Local.LoggedInOptions auth={auth} apolloPassport={apolloPassport} actions={actions} />
+
+            <Else />
+
+              <Local.LoggedInButtons onClick={actions.showPopupChangePass} actions={actions} />
+
+              <div className="login-button" id="login-buttons-logout" onClick={actions.logout}>
+                Sign out
+              </div>
+
+            </If>
 
           <Else />
 
             <If condition={false}>
-            <div className="or">
-              <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <span className="or-text">or</span>
-              <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            </div>
+              <div className="or">
+                <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span className="or-text">or</span>
+                <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              </div>
             </If>
-            <LocalSignIn auth={auth} apolloPassport={apolloPassport} />
 
-          </If>
+            <Local.SignIn auth={auth} apolloPassport={apolloPassport} actions={actions} />
+
+          </If>{/* condition={auth.data.userId} */}
 
         </div>{/* .accounts-dialog */}
 
@@ -58,17 +63,18 @@ const LoginButtonsUI = ({ auth, showPopup, actions, apolloPassport }) => (
             Sign in ▾
           </a>
 
-        </If>
+        </If>{/* condition={auth.data.userId} */}
 
-      </If>
+      </If>{/* condition={showPopup} */}
 
     </div>
   </div>
 );
 LoginButtonsUI.propTypes = {
-  auth: PropTypes.object,
-  showPopup: PropTypes.bool,
-  actions: PropTypes.object
+  auth: PropTypes.object.isRequired,
+  showPopup: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
+  actions: PropTypes.object.isRequired,
+  apolloPassport: PropTypes.object.isRequired
 };
 
 const actions = {
@@ -83,9 +89,16 @@ const actions = {
 
   logout() {
     this.apolloPassport.logout();
+    this.close();
   }
 
 };
+
+function showPopup(state) {
+  return function() { this.setState({ showPopup: state }); }
+}
+
+actions.showPopupChangePass = showPopup('changePass');
 
 class LoginButtons extends Component {
 
@@ -99,10 +112,7 @@ class LoginButtons extends Component {
       showPopup: false
     };
 
-    this.apStateHandler = function apStateHandler(state) {
-      this.setState({ auth: state });
-    }.bind(this);
-
+    this.apStateHandler = state => this.setState({ auth: state });
     apolloPassport.subscribe(this.apStateHandler);
   }
 
