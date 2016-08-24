@@ -28,9 +28,13 @@ const SomewhereInMyApp = () => (
 
 That's it!
 
-## TODO
+## Get Involved!
 
-* Ability to directly show a specific login form
+Hopefully you saw the IN DEVELOPMENT section of the `apollo-passport` README.
+
+[Open issues sorted by thumbs-up](https://github.com/apollo-passport/react/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc).
+
+Out of all of the apollo-passport-xxx packages, this is the least developed.  I'd love for someone else to be lead-maintaner for this package.  See also [open issues](https://github.com/apollo-passport/react/issues) (especially those marked as help-wanted) to see how you can help!  And the [CONTRIBUTING.md](CONTRIBUTING.md) file for design guidelines.
 
 ## Custom CSS
 

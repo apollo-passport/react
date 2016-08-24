@@ -23,7 +23,7 @@
     "auth",
     "authentication",
     "react",
-    "redux"
+    "apollo-passport-ui-framework"
   ],
   "author": "Gadi Cohen",
   "license": "MIT",

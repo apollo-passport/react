@@ -35,7 +35,20 @@ const LoginButtonsUI = ({ auth, showPopup, actions, apolloPassport }) => (
 
           <Else />
 
-            <If condition={false}>
+            <If condition={apolloPassport.discovered.services}>
+
+              <For each="service" of={apolloPassport.discovered.services}>
+                <div className="login-text-and-button">
+                  <div className="login-button single-login-button " id={"login-buttons-"+service.name} onClick={service.open}>
+                    <div className="login-image" style={{backgroundImage:service.iconUrl}} id={"login-buttons-image-"+service.name}></div>
+                    <span className={"text-besides-image sign-in-text-"+service.name}>Sign in with {service.label}</span>
+                  </div>
+                </div>
+              </For>
+
+            </If>
+
+            <If condition={apolloPassport.discovered.services && true /* local */}>
               <div className="or">
                 <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span className="or-text">or</span>
