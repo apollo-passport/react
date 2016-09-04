@@ -6,6 +6,7 @@ We use the format from [keepachangelog.com](keepachangelog.com).
 ## [Unreleased]
 ### Fixed
 * We no longer break when loading on the server (i.e. for SSR)
+* Services iterator now correctly uses a `key` attribute for each service.
 
 ## [v0.0.1]
 

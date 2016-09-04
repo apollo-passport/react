@@ -38,7 +38,7 @@ const LoginButtonsUI = ({ auth, showPopup, actions, apolloPassport }) => (
             <If condition={apolloPassport.discovered.services}>
 
               <For each="service" of={apolloPassport.discovered.services}>
-                <div className="login-text-and-button">
+                <div key={service.name} className="login-text-and-button">
                   <div className="login-button single-login-button " id={"login-buttons-"+service.name} onClick={service.open}>
                     <div className="login-image" style={{backgroundImage:service.iconUrl}} id={"login-buttons-image-"+service.name}></div>
                     <span className={"text-besides-image sign-in-text-"+service.name}>Sign in with {service.label}</span>
@@ -49,14 +49,14 @@ const LoginButtonsUI = ({ auth, showPopup, actions, apolloPassport }) => (
             </If>
 
             <If condition={apolloPassport.discovered.services && true /* local */}>
-              <div className="or">
+              <div key="or" className="or">
                 <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span className="or-text">or</span>
                 <span className="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
               </div>
             </If>
 
-            <Local.SignIn auth={auth} apolloPassport={apolloPassport} actions={actions} />
+            <Local.SignIn key="local" auth={auth} apolloPassport={apolloPassport} actions={actions} />
 
           </If>{/* condition={auth.data.userId} */}
 
