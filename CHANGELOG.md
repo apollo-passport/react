@@ -9,6 +9,8 @@ We use the format from [keepachangelog.com](keepachangelog.com).
 * Services iterator now correctly uses a `key` attribute for each service.
 * Fix quotes for loginEmailPassword icon.
 * Add missing `id="login-dropdown-list"` - fixes alignment issues.
+* Fix dialog not closing on logout.
+* Dialog now auto-closes on successful login.
 
 ## [v0.0.1]
 

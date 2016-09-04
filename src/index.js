@@ -102,7 +102,7 @@ const actions = {
 
   logout() {
     this.apolloPassport.logout();
-    this.close();
+    this.actions.close();
   }
 
 };
@@ -142,7 +142,12 @@ class LoginButtons extends Component {
       showPopup: false
     };
 
-    this.apStateHandler = state => this.setState({ auth: state });
+    this.apStateHandler = auth => {
+      this.setState({ auth });
+      if (auth.data.userId)
+        this.setState({ showPopup: false });
+    };
+
     apolloPassport.subscribe(this.apStateHandler);
   }
 
