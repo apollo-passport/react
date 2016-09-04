@@ -117,6 +117,23 @@ class LoginButtons extends Component {
 
   constructor({ apolloPassport }) {
     super();
+
+    if (!apolloPassport) {
+      // TODO this can happen with SSR, need to think about this more
+      // i.e. can we show the login state?
+      this.state = {
+        auth: {
+          data: {}
+        },
+        showPopup: false
+      };
+
+      this.actions = {};
+      this.apolloPassport = {};
+
+      return;
+    }
+
     this.actions = bindValues(actions, this);
     this.apolloPassport = apolloPassport;
 
