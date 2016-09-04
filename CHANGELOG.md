@@ -4,6 +4,8 @@ This project will adhere to [Semantic Versioning](http://semver.org/) from v1.0.
 We use the format from [keepachangelog.com](keepachangelog.com).
 
 ## [Unreleased]
+
+## [v0.0.2]
 ### Fixed
 * We no longer break when loading on the server (i.e. for SSR)
 * Services iterator now correctly uses a `key` attribute for each service.
@@ -17,3 +19,4 @@ We use the format from [keepachangelog.com](keepachangelog.com).
 Super early (unfinished) release for early birds.
 
 [Unreleased]: https://github.com/apollo-passport/react/compare/master...devel
+[v0.0.2]: https://github.com/apollo-passport/react/compare/v0.0.1...v0.0.2
