@@ -13,7 +13,7 @@ const LoginButtonsUI = ({ auth, showPopup, actions, apolloPassport }) => (
     <div className="login-link-and-dropdown-list login-form-sign-in">
       <If condition={showPopup}>
 
-        <div className="accounts-dialog">
+        <div id="login-dropdown-list" className="accounts-dialog">
           <a className="login-close-text" onClick={actions.close}>Close</a>
           <div className="login-close-text-clear"></div>
 
