@@ -68,7 +68,7 @@ const LoginButtonsUI = ({ auth, showPopup, actions, apolloPassport }) => (
         <If condition={auth.data.userId}>
 
           <div onClick={actions.open}>
-            {auth.data.userId} ▾
+            {auth.data.displayName || auth.data.userId} ▾
           </div>
 
         <Else />

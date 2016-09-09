@@ -11,6 +11,8 @@ We use the format from [keepachangelog.com](keepachangelog.com).
 
 ### Changed
 * `LoginButtons` now uses the `connect` function added in this release.
+* `LoginButtons` now defaults to showing the new `displayName` data vs
+  userId, if it's available.
 
 ## [v0.0.2]
 ### Fixed
