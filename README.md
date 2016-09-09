@@ -15,10 +15,11 @@ $ npm i --save apollo-passport-react
 ```
 
 ```js
-import { LoginButtons } from 'apollo-passport-react';
+import { LoginButtons } from 'apollo-passport-react/lib/ui';
 import 'apollo-passport-react/style/meteor.less';
 
 // Wherever you export your apolloPassport instance from...
+// Note, not necessary if using "Option 2" (ApolloPassportProvider) below.
 import { apolloPassport } from '../../../lib/apollo';
 
 const SomewhereInMyApp = () => (
@@ -27,6 +28,63 @@ const SomewhereInMyApp = () => (
 ```
 
 That's it!
+
+## Getting auth property in other components
+
+### Option 1: With Redux (recommended if you use Redux)
+
+If you use Redux, this is the recommended method.  **You need to have setup `apollo-passport` to use Redux too (see the README there)**.  Example, pass `userId` as a prop to your component.
+
+```js
+import { connect } from 'react-redux';
+
+const MyComponent = () => ( <div>etc</div> );
+
+const MyComponentWithData = connect(
+  ({ auth }) => ({ userId: auth.data.userId })
+)(MyComponent);
+```
+
+### Option 2: Without Redux (your only choice if you don't use Redux)
+
+If you don't use Redux, you need to wrap your main app with an `ApolloPassportProvider` [just like with apollo-react](http://dev.apollodata.com/react/initialization.html#creating-provider).
+
+**Step 1**: Use `ApolloPassportProvider` near the root of your tree (done for you already when using the Meteor integration):
+
+```js
+import ApolloClient from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
+import ApolloPassportProvider from 'apollo-passport-react';
+
+// Wherever you export your apolloPassport instance from...
+// Note, not necessary if using "Option 2" (ApolloPassportProvider) below.
+import { apolloPassport } from '../../../lib/apollo';
+
+const client = new ApolloClient();
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <ApolloPassportProvider apolloPassport={apolloPassport}>
+      <MyRootComponent />
+    </ApolloPassportProvider>
+  </ApolloProvider>,
+  rootEl
+);
+```
+
+**Step 2**: to get the `auth` state, or parts of it, use the connect-like function from the library:
+
+```js
+import apConnect from 'apollo-passport-react/lib/connect';
+
+const MyComponent = () => ( <div>etc</div> );
+
+const MyComponentWithData = apConnect(
+  ({ auth }) => ({ userId: auth.data.userId })
+)(MyComponent);
+```
+
+Note: although it seems superfluous to provide an `{ auth: { ...data } }` formed object, when it's obvious you want `auth`, we purposefully retain the same format you'd get from a Redux state store, to make it easy to switch between both options.
 
 ## Get Involved!
 

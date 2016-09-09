@@ -5,6 +5,10 @@ We use the format from [keepachangelog.com](keepachangelog.com).
 
 ## [Unreleased]
 
+### Added
+* `Provider-` and `connect-` style functions to make auth data accessible to
+  components when Redux is not used.
+
 ## [v0.0.2]
 ### Fixed
 * We no longer break when loading on the server (i.e. for SSR)
