@@ -4,10 +4,13 @@ This project will adhere to [Semantic Versioning](http://semver.org/) from v1.0.
 We use the format from [keepachangelog.com](keepachangelog.com).
 
 ## [Unreleased]
-
 ### Added
 * `Provider-` and `connect-` style functions to make auth data accessible to
-  components when Redux is not used.
+  components when Redux is not used.  Note, `connect` also accepts an
+  `apolloPassport` prop for use when not inside of the `Provider`.
+
+### Changed
+* `LoginButtons` now uses the `connect` function added in this release.
 
 ## [v0.0.2]
 ### Fixed

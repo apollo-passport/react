@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Local from './local';
+import connect from './connect';
 
 function bindValues(obj, that) {
   const out = {};
@@ -113,54 +114,41 @@ function showPopup(state) {
 
 actions.showPopupChangePass = showPopup('changePass');
 
-class LoginButtons extends Component {
+class LoginButtonsController extends Component {
 
   constructor({ apolloPassport }) {
     super();
+    this.state = { showPopup: false };
 
     if (!apolloPassport) {
       // TODO this can happen with SSR, need to think about this more
-      // i.e. can we show the login state?
-      this.state = {
-        auth: {
-          data: {}
-        },
-        showPopup: false
-      };
-
       this.actions = {};
       this.apolloPassport = {};
-
       return;
     }
 
     this.actions = bindValues(actions, this);
     this.apolloPassport = apolloPassport;
-
-    this.state = {
-      auth: apolloPassport.getState(),
-      showPopup: false
-    };
-
-    this.apStateHandler = auth => {
-      this.setState({ auth });
-      if (auth.data.userId)
-        this.setState({ showPopup: false });
-    };
-
-    apolloPassport.subscribe(this.apStateHandler);
   }
 
-  componentWillUnmount() {
-    this.apolloPassport.unsubscribe(this.apStateHandler);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.data.userId && !this.props.auth.data.userId)
+      this.setState({ showPopup: false });
   }
 
   render() {
     return (
-      <LoginButtonsUI {...this.state} actions={this.actions} apolloPassport={this.apolloPassport} />
+      <LoginButtonsUI {...this.state} {...this.props} actions={this.actions} />
     );
   }
 
 }
 
-export { LoginButtons };
+LoginButtonsController.propTypes = {
+  auth: PropTypes.object.isRequired,
+  apolloPassport: PropTypes.object.isRequired
+}
+
+const LoginButtonsData = connect()(LoginButtonsController);
+
+export { LoginButtonsData as LoginButtons };

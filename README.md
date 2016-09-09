@@ -15,13 +15,14 @@ $ npm i --save apollo-passport-react
 ```
 
 ```js
-import { LoginButtons } from 'apollo-passport-react/lib/ui';
+import { LoginButtons } from 'apollo-passport-react';
 import 'apollo-passport-react/style/meteor.less';
 
 // Wherever you export your apolloPassport instance from...
 // Note, not necessary if using "Option 2" (ApolloPassportProvider) below.
 import { apolloPassport } from '../../../lib/apollo';
 
+// apolloPassport prop can be ommitted when using "Option 2" below.
 const SomewhereInMyApp = () => (
   <LoginButtons apolloPassport={apolloPassport} />
 );
