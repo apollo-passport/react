@@ -4,6 +4,8 @@ This project will adhere to [Semantic Versioning](http://semver.org/) from v1.0.
 We use the format from [keepachangelog.com](keepachangelog.com).
 
 ## [Unreleased]
+
+## [v0.0.3]
 ### Added
 * `Provider-` and `connect-` style functions to make auth data accessible to
   components when Redux is not used.  Note, `connect` also accepts an
@@ -31,4 +33,5 @@ We use the format from [keepachangelog.com](keepachangelog.com).
 Super early (unfinished) release for early birds.
 
 [Unreleased]: https://github.com/apollo-passport/react/compare/master...devel
+[v0.0.3]: https://github.com/apollo-passport/react/compare/v0.0.2...v0.0.3
 [v0.0.2]: https://github.com/apollo-passport/react/compare/v0.0.1...v0.0.2
