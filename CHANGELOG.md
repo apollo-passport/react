@@ -14,6 +14,9 @@ We use the format from [keepachangelog.com](keepachangelog.com).
 * `LoginButtons` now defaults to showing the new `displayName` data vs
   userId, if it's available.
 
+### Fixed
+* `LogginedInButtons` proptype warning.
+
 ## [v0.0.2]
 ### Fixed
 * We no longer break when loading on the server (i.e. for SSR)

@@ -126,7 +126,7 @@ class LoggedInButtons extends Component {
 }
 
 LoggedInButtons.propTypes = {
-  onClick: PropTypes.function
+  onClick: PropTypes.func.isRequired
 };
 
 class LoggedInOptions extends Component {
